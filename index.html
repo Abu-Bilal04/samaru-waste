@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Samaru Waste Ecosystem | Sustainable Future</title>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+
+    <style>
+        :root {
+            --primary-green: #2e7d32;
+            --accent-green: #66bb6a;
+            --dark-bg: #0d1b11;
+            --text-light: #f1f8e9;
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--text-light);
+            overflow-x: hidden;
+        }
+
+        /* --- Navbar --- */
+        .navbar {
+            background: rgba(13, 27, 17, 0.8) !important;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--glass-border);
+        }
+        .navbar-brand {
+            font-weight: 700;
+            color: var(--accent-green) !important;
+            letter-spacing: -0.5px;
+        }
+        .btn-custom {
+            background: linear-gradient(135deg, var(--primary-green), var(--accent-green));
+            border: none;
+            color: white;
+            padding: 10px 25px;
+            border-radius: 50px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .btn-custom:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(46, 125, 50, 0.4);
+            color: white;
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: radial-gradient(circle at 50% 50%, rgba(46, 125, 50, 0.2) 0%, transparent 70%);
+            overflow: hidden;
+        }
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            line-height: 1.1;
+            background: linear-gradient(to right, #fff, #a5d6a7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1.5rem;
+        }
+        .hero p {
+            font-size: 1.25rem;
+            color: #b0bec5;
+            max-width: 600px;
+            margin: 0 auto 2rem auto;
+        }
+        
+        /* Floating Blobs */
+        .blob {
+            position: absolute;
+            filter: blur(80px);
+            z-index: -1;
+            opacity: 0.5;
+            animation: float 10s infinite alternate;
+        }
+        .blob-1 { top: 10%; left: 10%; width: 300px; height: 300px; background: #2e7d32; }
+        .blob-2 { bottom: 20%; right: 10%; width: 400px; height: 400px; background: #1b5e20; animation-delay: -5s; }
+
+        @keyframes float {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(30px, 50px); }
+        }
+
+        /* --- Features Cards --- */
+        .feature-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+        .feature-card:hover {
+            background: rgba(46, 125, 50, 0.1);
+            transform: translateY(-10px);
+            border-color: var(--primary-green);
+        }
+        .icon-box {
+            width: 60px;
+            height: 60px;
+            background: var(--glass-border);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--accent-green);
+            margin-bottom: 1.5rem;
+        }
+
+        /* --- Stats Section --- */
+        .stat-item {
+            text-align: center;
+        }
+        .stat-number {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: #fff;
+            display: block;
+        }
+        .stat-label {
+            color: var(--accent-green);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+        }
+
+        /* --- Footer --- */
+        footer {
+            border-top: 1px solid var(--glass-border);
+            padding: 2rem 0;
+            margin-top: 4rem;
+            text-align: center;
+            color: #6c757d;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Nav -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">Samaru<span class="text-white">Waste</span></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item me-3"><a class="nav-link" href="#features">Features</a></li>
+                    <li class="nav-item me-3"><a class="nav-link" href="#impact">Impact</a></li>
+                    <li class="nav-item">
+                        <a href="dashboard/login.html" class="btn btn-custom">Login</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero text-center">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        
+        <div class="container" data-aos="fade-up" data-aos-duration="1000">
+            <h1>Cleaner Blockchain.<br>Greener Future.</h1>
+            <p>Empowering communities in Samaru to turn waste into wealth through decentralized tracking and transparent rewards.</p>
+            <div class="d-flex justify-content-center gap-3">
+                <a href="#impact" class="btn btn-custom btn-lg">View Live Stats</a>
+                <a href="dashboard/login.html" class="btn btn-outline-light btn-lg rounded-pill px-4">Admin Access</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section id="features" class="py-5">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="feature-card">
+                        <div class="icon-box"><i class="bi bi-phone"></i></div>
+                        <h4>USSD Integrated</h4>
+                        <p class="text-secondary">Accessible to everyone. Log collections and deliveries instantly via simple mobile codes, no internet required.</p>
+                    </div>
+                </div>
+                <!-- Blockchain Feature with Connection Status -->
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="feature-card">
+                        <div class="icon-box"><i class="bi bi-box-seam"></i></div>
+                        <h4>Blockchain Verified</h4>
+                        <p class="text-secondary">Every kilogram collected is immutably recorded on the Cardano blockchain for total transparency.</p>
+                        <small id="blockStatus" class="text-muted d-block mt-2">Checking Chain...</small>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="feature-card">
+                        <div class="icon-box"><i class="bi bi-graph-up-arrow"></i></div>
+                        <h4>Real-Time Impact</h4>
+                        <p class="text-secondary">Monitor waste reduction and recycling metrics in real-time through our live dashboard.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Live Stats -->
+    <section id="impact" class="py-5 bg-dark">
+        <div class="container">
+            <div class="mb-5 text-center" data-aos="fade-in">
+                <h6 class="text-success text-uppercase">Live Impact</h6>
+                <h2 class="text-white">Making a difference, one kg at a time.</h2>
+            </div>
+            
+            <div class="row text-center">
+                <div class="col-md-6 mb-4" data-aos="zoom-in">
+                    <div class="stat-item">
+                        <span class="stat-number" id="stats-kg">0</span>
+                        <span class="stat-label">Kilograms Collected</span>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="stat-item">
+                        <span class="stat-number" id="stats-users">0</span>
+                        <span class="stat-label">Active Collectors</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Samaru Waste Management System. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="js/storage.js"></script>
+    <script src="js/blockfrost.js"></script>
+    <script>
+        // Init Animation
+        AOS.init({ once: true });
+
+        // Load Stats from Storage
+        function loadStats() {
+            const stats = Storage.getStats();
+            animateValue("stats-kg", 0, stats.totalWaste, 2000);
+            animateValue("stats-users", 0, stats.activeCollectors, 2000);
+        }
+
+        // Check Blockchain status
+        async function loadBlockStatus() {
+            const block = await Blockfrost.fetchLatestBlock();
+            const el = document.getElementById('blockStatus');
+            if (block) {
+                el.innerHTML = `<span class="text-success"><i class="bi bi-check-circle-fill"></i> Connected to Cardano Preprod</span><br>Block: #${block.height}`;
+            } else {
+                el.innerHTML = `<span class="text-danger">Network Unavailable</span>`;
+            }
+        }
+
+        // Number Animation Helper
+        function animateValue(id, start, end, duration) {
+            if (start === end) {
+                document.getElementById(id).innerHTML = end.toLocaleString();
+                return;
+            }
+            const range = end - start;
+            let current = start;
+            const stepTime = Math.abs(Math.floor(duration / (range || 1)));
+            const obj = document.getElementById(id);
+            const timer = setInterval(function() {
+                current += Math.ceil(range / 50);
+                if (current >= end) {
+                    current = end;
+                    clearInterval(timer);
+                }
+                obj.innerHTML = current.toLocaleString();
+            }, Math.max(stepTime, 20)); 
+            
+            // final set
+            setTimeout(() => obj.innerHTML = end.toLocaleString(), duration + 50);
+        }
+
+        // Run on load
+        loadStats();
+        loadBlockStatus();
+    </script>
+</body>
+</html>

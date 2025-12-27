@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community Managers | Samaru Waste</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;700&display=swap"
+        rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <style>
+        :root {
+            --primary-green: #2e7d32;
+            --secondary-green: #e8f5e9;
+            --sidebar-width: 260px;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+            color: #1f2937;
+        }
+
+        .sidebar {
+            width: var(--sidebar-width);
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background: #ffffff;
+            border-right: 1px solid #e5e7eb;
+            padding: 1.5rem;
+        }
+
+        .brand-logo {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-green);
+            margin-bottom: 2.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #6b7280;
+            padding: 0.85rem 1rem;
+            border-radius: 8px;
+            font-weight: 500;
+            text-decoration: none;
+            margin-bottom: 0.25rem;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            background-color: var(--secondary-green);
+            color: var(--primary-green);
+        }
+
+        .main-content {
+            margin-left: var(--sidebar-width);
+            padding: 2rem 2.5rem;
+            min-height: 100vh;
+        }
+
+        .content-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            border: 1px solid #f0f0f0;
+        }
+
+        .page-header {
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .page-title {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 700;
+            color: #111827;
+            margin: 0;
+            font-size: 1.75rem;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="sidebar">
+        <div class="brand-logo"><i class="bi bi-recycle"></i> Samaru Waste</div>
+        <div class="nav flex-column">
+            <a href="index.html" class="nav-link"><i class="bi bi-grid-1x2"></i> Overview</a>
+            <a href="collectors.html" class="nav-link"><i class="bi bi-people"></i> Waste Collectors</a>
+            <a href="community_collectors.html" class="nav-link active"><i class="bi bi-building"></i> Community
+                Mgrs</a>
+            <a href="records.html" class="nav-link"><i class="bi bi-file-earmark-text"></i> Waste Records</a>
+            <a href="benefits.html" class="nav-link"><i class="bi bi-graph-up"></i> Benefits & Sales</a>
+        </div>
+        <div class="mt-auto">
+            <a href="#" onclick="logout()" class="nav-link text-danger"><i class="bi bi-box-arrow-right"></i> Logout</a>
+        </div>
+    </nav>
+
+    <div class="main-content">
+        <div class="page-header">
+            <div>
+                <h2 class="page-title">Community Managers</h2>
+                <p class="text-muted mb-0">Manage the supervisors who oversee zones and verification.</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Registration Form -->
+            <div class="col-lg-4 mb-4">
+                <div class="content-card h-100">
+                    <h5 class="fw-bold mb-4"><i class="bi bi-person-plus-fill text-success me-2"></i> Register New
+                        Manager</h5>
+
+                    <form id="addManagerForm">
+                        <div class="mb-3">
+                            <label class="form-label text-muted small fw-bold">FULL NAME</label>
+                            <input type="text" id="mgrName" class="form-control" placeholder="e.g. Sarah Connor"
+                                required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label text-muted small fw-bold">PHONE NUMBER</label>
+                            <input type="text" id="mgrPhone" class="form-control" placeholder="e.g. 08012345678"
+                                required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label text-muted small fw-bold">ZONE / ADDRESS</label>
+                            <input type="text" id="mgrAddress" class="form-control"
+                                placeholder="e.g. Zone A, Main Market" required>
+                        </div>
+                        <div class="d-grid mt-4">
+                            <button type="submit" class="btn btn-success">Create Account</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- List -->
+            <div class="col-lg-8">
+                <div class="content-card">
+                    <h5 class="fw-bold mb-4">Registered Managers</h5>
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Manager ID</th>
+                                    <th>Name</th>
+                                    <th>Contact</th>
+                                    <th>Zone</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="mgrTableBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/storage.js"></script>
+    <script>
+        if (!sessionStorage.getItem('samaru_admin')) window.location.href = 'login.html';
+        function logout() { sessionStorage.removeItem('samaru_admin'); window.location.href = '../index.html'; }
+
+        function renderManagers() {
+            const mgrs = Storage.getManagers();
+            const tbody = document.getElementById('mgrTableBody');
+            if (mgrs.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="5" class="text-center py-5 text-muted">No managers found.</td></tr>';
+                return;
+            }
+            tbody.innerHTML = mgrs.map(u => `
+                <tr>
+                    <td><span class='badge bg-light text-dark border'>${u.user_unique_id}</span></td>
+                    <td class='fw-medium'>${u.name}</td>
+                    <td class='text-muted'>${u.phone}</td>
+                    <td>${u.address}</td>
+                    <td><span class='badge bg-success bg-opacity-10 text-success'>Active</span></td>
+                </tr>
+            `).join('');
+        }
+
+        document.getElementById('addManagerForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('mgrName').value;
+            const phone = document.getElementById('mgrPhone').value;
+            const address = document.getElementById('mgrAddress').value;
+
+            // Generate random CC ID
+            const newId = "CC" + Math.floor(100 + Math.random() * 900);
+
+            Storage.addUser({
+                user_unique_id: newId,
+                name: name,
+                phone: phone,
+                address: address,
+                role_level: 3 // Community Manager
+            });
+
+            e.target.reset();
+            alert("New Community Manager created with ID: " + newId);
+            renderManagers();
+        });
+
+        renderManagers();
+    </script>
+</body>
+
+</html>

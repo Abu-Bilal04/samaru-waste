@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Collectors | Samaru Waste</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;700&display=swap"
+        rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <style>
+        :root {
+            --primary-green: #2e7d32;
+            --secondary-green: #e8f5e9;
+            --sidebar-width: 260px;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+            color: #1f2937;
+        }
+
+        .sidebar {
+            width: var(--sidebar-width);
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background: #ffffff;
+            border-right: 1px solid #e5e7eb;
+            padding: 1.5rem;
+        }
+
+        .brand-logo {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-green);
+            margin-bottom: 2.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #6b7280;
+            padding: 0.85rem 1rem;
+            border-radius: 8px;
+            font-weight: 500;
+            text-decoration: none;
+            margin-bottom: 0.25rem;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            background-color: var(--secondary-green);
+            color: var(--primary-green);
+        }
+
+        .main-content {
+            margin-left: var(--sidebar-width);
+            padding: 2rem 2.5rem;
+            min-height: 100vh;
+        }
+
+        .content-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            border: 1px solid #f0f0f0;
+        }
+
+        .page-header {
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .page-title {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 700;
+            color: #111827;
+            margin: 0;
+            font-size: 1.75rem;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="sidebar">
+        <div class="brand-logo"><i class="bi bi-recycle"></i> Samaru Waste</div>
+        <div class="nav flex-column">
+            <a href="index.html" class="nav-link"><i class="bi bi-grid-1x2"></i> Overview</a>
+            <a href="collectors.html" class="nav-link active"><i class="bi bi-people"></i> Waste Collectors</a>
+            <a href="community_collectors.html" class="nav-link"><i class="bi bi-building"></i> Community Mgrs</a>
+            <a href="records.html" class="nav-link"><i class="bi bi-file-earmark-text"></i> Waste Records</a>
+            <a href="benefits.html" class="nav-link"><i class="bi bi-graph-up"></i> Benefits & Sales</a>
+        </div>
+        <div class="mt-auto">
+            <a href="#" onclick="logout()" class="nav-link text-danger"><i class="bi bi-box-arrow-right"></i> Logout</a>
+        </div>
+    </nav>
+
+    <div class="main-content">
+        <div class="page-header">
+            <div>
+                <h2 class="page-title">Waste Collectors</h2>
+                <p class="text-muted mb-0">Registered field collectors gathering waste from house-to-house.</p>
+            </div>
+            <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addUserModal"><i
+                    class="bi bi-plus-lg"></i> Add Collector</button>
+        </div>
+
+        <div class="content-card">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h5 class="fw-bold m-0">Collector Directory</h5>
+                <div class="input-group" style="max-width: 300px;">
+                    <span class="input-group-text bg-white border-end-0"><i class="bi bi-search"></i></span>
+                    <input type="text" id="searchInput" class="form-control border-start-0"
+                        placeholder="Search collectors...">
+                </div>
+            </div>
+
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Collector ID</th>
+                            <th>Name</th>
+                            <th>Phone</th>
+                            <th>Zone/Address</th>
+                            <th>Joined Date</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="usersTableBody"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add User Modal -->
+    <div class="modal fade" id="addUserModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Register New Collector</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="addUserForm">
+                        <div class="mb-3">
+                            <label class="form-label">Full Name</label>
+                            <input type="text" id="newUserName" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Phone</label>
+                            <input type="text" id="newUserPhone" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Zone/Address</label>
+                            <input type="text" id="newUserAddress" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Unique ID</label>
+                            <input type="text" id="newUserUniqueId" class="form-control" placeholder="USR-xxxx"
+                                required>
+                        </div>
+                        <button type="submit" class="btn btn-success w-100">Register</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/storage.js"></script>
+    <script>
+        if (!sessionStorage.getItem('samaru_admin')) window.location.href = 'login.html';
+        function logout() { sessionStorage.removeItem('samaru_admin'); window.location.href = '../index.html'; }
+
+        function renderUsers(filterText = '') {
+            const users = Storage.getCollectors();
+            const tbody = document.getElementById('usersTableBody');
+
+            const filtered = users.filter(u =>
+                u.name.toLowerCase().includes(filterText.toLowerCase()) ||
+                u.user_unique_id.toLowerCase().includes(filterText.toLowerCase())
+            );
+
+            if (filtered.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="6" class="text-center py-5 text-muted">No collectors found.</td></tr>';
+                return;
+            }
+
+            tbody.innerHTML = filtered.map(u => `
+                <tr>
+                    <td><span class='badge bg-light text-dark border'>${u.user_unique_id}</span></td>
+                    <td class='fw-medium'>${u.name}</td>
+                    <td class='text-muted'>${u.phone || '-'}</td>
+                    <td>${u.address || '-'}</td>
+                    <td>${u.created_at || '-'}</td>
+                    <td><span class='badge bg-success bg-opacity-10 text-success'>Verified</span></td>
+                </tr>
+            `).join('');
+        }
+
+        document.getElementById('addUserForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('newUserName').value;
+            const phone = document.getElementById('newUserPhone').value;
+            const address = document.getElementById('newUserAddress').value;
+            const uid = document.getElementById('newUserUniqueId').value;
+
+            Storage.addUser({
+                user_unique_id: uid,
+                name: name,
+                phone: phone,
+                address: address,
+                role_level: 2
+            });
+
+            bootstrap.Modal.getInstance(document.getElementById('addUserModal')).hide();
+            e.target.reset();
+            renderUsers();
+        });
+
+        document.getElementById('searchInput').addEventListener('input', (e) => {
+            renderUsers(e.target.value);
+        });
+
+        renderUsers();
+    </script>
+</body>
+
+</html>

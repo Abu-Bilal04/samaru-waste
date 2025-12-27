@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Benefits & Sales | Samaru Waste</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;700&display=swap"
+        rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <style>
+        :root {
+            --primary-green: #2e7d32;
+            --secondary-green: #e8f5e9;
+            --sidebar-width: 260px;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+            color: #1f2937;
+        }
+
+        .sidebar {
+            width: var(--sidebar-width);
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background: #ffffff;
+            border-right: 1px solid #e5e7eb;
+            padding: 1.5rem;
+        }
+
+        .brand-logo {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-green);
+            margin-bottom: 2.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #6b7280;
+            padding: 0.85rem 1rem;
+            border-radius: 8px;
+            font-weight: 500;
+            text-decoration: none;
+            margin-bottom: 0.25rem;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            background-color: var(--secondary-green);
+            color: var(--primary-green);
+        }
+
+        .main-content {
+            margin-left: var(--sidebar-width);
+            padding: 2rem 2.5rem;
+            min-height: 100vh;
+        }
+
+        .content-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            border: 1px solid #f0f0f0;
+        }
+
+        .page-header {
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .page-title {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 700;
+            color: #111827;
+            margin: 0;
+            font-size: 1.75rem;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="sidebar">
+        <div class="brand-logo"><i class="bi bi-recycle"></i> Samaru Waste</div>
+        <div class="nav flex-column">
+            <a href="index.html" class="nav-link"><i class="bi bi-grid-1x2"></i> Overview</a>
+            <a href="collectors.html" class="nav-link"><i class="bi bi-people"></i> Waste Collectors</a>
+            <a href="community_collectors.html" class="nav-link"><i class="bi bi-building"></i> Community Mgrs</a>
+            <a href="records.html" class="nav-link"><i class="bi bi-file-earmark-text"></i> Waste Records</a>
+            <a href="benefits.html" class="nav-link active"><i class="bi bi-graph-up"></i> Benefits & Sales</a>
+        </div>
+        <div class="mt-auto">
+            <a href="#" onclick="logout()" class="nav-link text-danger"><i class="bi bi-box-arrow-right"></i> Logout</a>
+        </div>
+    </nav>
+
+    <div class="main-content">
+        <div class="page-header">
+            <div>
+                <h2 class="page-title">Benefits & Value Generated</h2>
+                <p class="text-muted mb-0">Tracking the economic value created from waste (e.g., Manure Sales, Plastic
+                    Recycled).</p>
+            </div>
+            <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addBenefitModal"><i
+                    class="bi bi-plus-lg"></i> Record Sale/Benefit</button>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <div class="content-card">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h5 class="fw-bold text-primary m-0"><i class="bi bi-graph-up-arrow me-2"></i> Value Generation
+                            Log</h5>
+                        <span class="badge bg-primary bg-opacity-10 text-primary">Benefits</span>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Manager ID</th>
+                                    <th>Benefit Type</th>
+                                    <th>Details</th>
+                                    <th>Value Generated</th>
+                                </tr>
+                            </thead>
+                            <tbody id="benefitsTableBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Benefit Modal -->
+    <div class="modal fade" id="addBenefitModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Record Benefit</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="addBenefitForm">
+                        <div class="mb-3">
+                            <label class="form-label">Manager ID</label>
+                            <input type="text" id="benUserId" class="form-control" placeholder="CC-101" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Benefit Type</label>
+                            <select id="benType" class="form-select">
+                                <option value="manure_sales">Manure Sales</option>
+                                <option value="plastic_recycling">Plastic Recycling</option>
+                                <option value="metal_scrap">Metal Scrap</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Description / Details</label>
+                            <input type="text" id="benDesc" class="form-control" placeholder="e.g. Sold 50 bags"
+                                required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Value (Currency)</label>
+                            <input type="text" id="benValue" class="form-control" placeholder="e.g. ₦ 50,000" required>
+                        </div>
+                        <button type="submit" class="btn btn-success w-100">Record</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/storage.js"></script>
+    <script>
+        if (!sessionStorage.getItem('samaru_admin')) window.location.href = 'login.html';
+        function logout() { sessionStorage.removeItem('samaru_admin'); window.location.href = '../index.html'; }
+
+        function renderBenefits() {
+            const ben = Storage.getBenefits();
+            const tbody = document.getElementById('benefitsTableBody');
+
+            if (ben.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="5" class="text-center py-5 text-muted">No benefits recorded yet.</td></tr>';
+                return;
+            }
+
+            // Sort Descending
+            ben.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+
+            tbody.innerHTML = ben.map(b => `
+                <tr>
+                    <td class='text-muted small'>${b.created_at}</td>
+                    <td class='fw-medium'>${b.user_unique_id}</td>
+                    <td><span class='badge bg-info bg-opacity-10 text-info'>${b.benefit_type.replace('_', ' ').toUpperCase()}</span></td>
+                    <td class='text-muted small'>${b.description}</td>
+                    <td class='fw-bold text-success fs-5'>${b.amount_value}</td>
+                </tr>
+            `).join('');
+        }
+
+        document.getElementById('addBenefitForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const uid = document.getElementById('benUserId').value;
+            const type = document.getElementById('benType').value;
+            const desc = document.getElementById('benDesc').value;
+            const val = document.getElementById('benValue').value;
+
+            Storage.addBenefit({
+                user_unique_id: uid,
+                benefit_type: type,
+                description: desc,
+                amount_value: val
+            });
+
+            bootstrap.Modal.getInstance(document.getElementById('addBenefitModal')).hide();
+            e.target.reset();
+            renderBenefits();
+        });
+
+        renderBenefits();
+    </script>
+</body>
+
+</html>
